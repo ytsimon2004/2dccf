@@ -133,8 +133,8 @@ for i = 1:length(images)
 end
 % Save the tables as one big table
 rois_name = {'rfp';'gfp'};
-Coordinates= table();
 for ch = n_rgb
+    Coordinates= table();
     rois_name_cur = rois_name{ch};
     for i = 1:size(listTable,1)
         tables = listTable{i,ch};
