@@ -145,7 +145,11 @@ for ch = n_rgb
     mkdir(save_folder)
     end
     
-    save(fullfile(save_folder,[image_name(1:tmp(2)-1),'_',rois_name_cur,'_roitable.mat']), 'Coordinates');
+    filename = [image_name(1:tmp(3)-1),'_',rois_name_cur,'_roitable.mat'];
+    csvfile = [image_name(1:tmp(3)-1),'_',rois_name_cur,'_roitable.csv'];
+    save(fullfile(save_folder,filename), 'Coordinates');
+    writetable(Coordinates, fullfile(save_folder,csvfile));
+
 end
 A = load(fullfile(save_folder,[image_name(1:tmp(2)-1),'_',rois_name_cur,'_roitable.mat']));
 disp(['Finished: ', 'Check variable A'])
