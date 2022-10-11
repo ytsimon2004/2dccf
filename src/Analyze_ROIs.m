@@ -4,7 +4,7 @@ data = dir(fullfile(path2data,'*_data.mat'));
 images = dir (fullfile(path2data, '*transformed.tif'));
 annotation_volume_location = [pata2ref,'\annotation_volume_10um_by_index.npy'];
 structure_tree_location = [pata2ref,'\structure_tree_safe_2017.csv'];
-save_folder= [path2data, '\labelled regions'];
+save_folder= [path2data, '\labelled_regions'];
 
 %% LOAD THE DATA
 listTable = cell(length(images),n_ch);clc
@@ -77,7 +77,7 @@ for i = 1:length(images)
     for channel = n_rgb
         clear roi_annotation
         rois_cur = []; rois_cur = rois_total{channel};
-        assert(size(rois_cur,1)== 800&size(rois_cur,2)==1140&size(rois_cur,3)==1,'roi image is not the right size');
+        assert(size(rois_cur,1)== 800&size(rois_cur,2)==1140&size(rois_cur,3)==1,'roi image is not the right size');  % note the shape need to be the same
         full_image_name = zeros(sum(rois_cur(:)>0),3);
         roi_annotation = cell(sum(rois_cur(:)>0),3);
         % get location and annotation for every roi pixel
@@ -133,6 +133,7 @@ for i = 1:length(images)
 end
 % Save the tables as one big table
 rois_name = {'rfp';'gfp'};
+% Coordinates= table();
 for ch = n_rgb
     Coordinates= table();
     rois_name_cur = rois_name{ch};
@@ -149,7 +150,6 @@ for ch = n_rgb
     csvfile = [image_name(1:tmp(3)-1),'_',rois_name_cur,'_roitable.csv'];
     save(fullfile(save_folder,filename), 'Coordinates');
     writetable(Coordinates, fullfile(save_folder,csvfile));
-
 end
-A = load(fullfile(save_folder,[image_name(1:tmp(2)-1),'_',rois_name_cur,'_roitable.mat']));
-disp(['Finished: ', 'Check variable A'])
+A = load(fullfile(save_folder,[image_name(1:tmp(3)-1),'_',rois_name_cur,'_roitable.mat']));
+disp(['Finished: ', 'Check output files under labelled_regions folder'])
