@@ -31,7 +31,7 @@ if myChannel == 1
 elseif myChannel == 2
     n_ch = 1;n_rgb = 2;name_rgb = 'green';
 else
-    myChannel = 2;
+    myChannel == 2;
     n_rgb = [1 2];name_rgb = 'red + green';
 end
 
