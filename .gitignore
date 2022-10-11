@@ -48,3 +48,6 @@ Thumbs.db
 *.mov
 *.wmv
 
+# large file for allen altas references
+ref/*.npy
+
