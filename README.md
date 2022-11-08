@@ -33,8 +33,11 @@
         │    │       ├── YW001_g*_s*_processed_transform_data.mat
         │    │       └── YW001_g*_s*_processed_transformed.tif
         │    └── YW001_g*_s*_resize.tif
-        ├── YW001_g*_s*.tif
-        ├── YW001_g*_s*.roi
+        ├── zproj/
+        │    └── YW001_g*_s*_{channel}.tif
+        ├── roi/
+        │    └── YW001_g*_s*_{channel}.roi
+        │ 
         └── output_files/ (for generate output fig)
 
 
