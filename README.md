@@ -22,24 +22,31 @@
 ## Data structure
 
     YW001_reg/
-        ├── resize/
-        │    ├── processed/
-        │    │   ├── YW001_g*_s*_processed.tif
-        │    │   └── transformations/
-        │    │       ├── labelled_regions/
-        │    │       │   └── output.csv
-        │    │       ├── transform_matrix/
-        │    │       │   └── YW001_gx_sx_processed_transform_data.mat
-        │    │       ├── YW001_g*_s*_processed_transform_data.mat
-        │    │       └── YW001_g*_s*_processed_transformed.tif
-        │    └── YW001_g*_s*_resize.tif
-        ├── zproj/
+        ├── raw/ (*optional) -- (1)
+        │
+        ├── zproj/ -- (2)
         │    └── YW001_g*_s*_{channel}.tif
-        ├── roi/
-        │    └── YW001_g*_s*_{channel}.roi
-        │ 
+        │
+        ├── roi/ -- (3)
+        │    └── YW001_g*_s*_{channel}.roi  
+        │
+        ├── resize/ (src for the allenccf) 
+        │    ├── YW001_g*_s*_resize.tif -- (4)
+        │    │ 
+        │    └── processed/
+        │           ├── YW001_g*_s*_processed.tif -- (5)
+        │           └── transformations/
+        │                 ├── YW001_g*_s*_processed_transformed.tif -- (6)
+        │                 │
+        │                 ├── transform_matrix/  -- (7)
+        │                 │   └── YW001_g*_s*_processed_transform_data.mat
+        │                 │ 
+        │                 └── labelled_regions/
+        │                       ├── {*channel}_roitable.csv -- (8) 
+        │                       └── parsed_data / 
+        │                             └── parsed_csv_merge.csv -- (9)
+        │
         └── output_files/ (for generate output fig)
-
 
 # How to start?
 ## Preprocess using fiji
