@@ -22,7 +22,7 @@
 ## Data structure
 
     YW001_reg/
-        ├── raw/ (*optional) -- (1)
+        ├── raw/ (optional) -- (1)
         │
         ├── zproj/ -- (2)
         │    └── YW001_g*_s*_{channel}.tif
@@ -46,6 +46,7 @@
         │                       └── parsed_data / 
         │                             └── parsed_csv_merge.csv -- (9)
         │
+        ├── resize_overlap/* (optional) -- (10)
         └── output_files/ (for generate output fig)
 
 * (1). raw data for confocal (i.e., .lsm, .czi or .tiff)
@@ -59,6 +60,7 @@
 * (7) transformation matrix for each slices
 * (8) allenccf output (per ROI)
 * (9) csv after parsed and classification (used for data visualization)
+* (10) if there is overlap channel, create the same folder structure as r/g channels. ** Note that use the same transformation matrix
 
 # How to start?
 ## Preprocess using fiji
