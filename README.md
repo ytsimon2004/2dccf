@@ -34,12 +34,12 @@
         │    ├── YW001_g*_s*_resize.tif -- (4)
         │    │ 
         │    └── processed/
-        │           ├── YW001_g*_s*_processed.tif -- (5)
+        │           ├── YW001_g*_s*_resize_processed.tif -- (5)
         │           └── transformations/
-        │                 ├── YW001_g*_s*_processed_transformed.tif -- (6)
+        │                 ├── YW001_g*_s*_resize_processed_transformed.tif -- (6)
         │                 │
-        │                 ├── transform_matrix/  -- (7)
-        │                 │   └── YW001_g*_s*_processed_transform_data.mat
+        │                 ├── YW001_g*_s*_resize_processed_transform_data.mat -- (7)
+        │                 │
         │                 │ 
         │                 └── labelled_regions/
         │                       ├── {*channel}_roitable.csv -- (8) 
