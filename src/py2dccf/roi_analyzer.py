@@ -1,10 +1,12 @@
 import re
 from pathlib import Path
-from typing import List
+from typing import List, Union
 
 import numpy as np
 from PIL import Image
 from scipy.io import loadmat
+
+from src.py2dccf.util import load_image_file
 
 
 class ROIAnalyzer:
@@ -43,14 +45,6 @@ class ROIAnalyzer:
     def save_folder(self) -> Path:
         return self.path / 'labelled_region'
 
-    @staticmethod
-    def split_rgb(img: Image):
-        r = [(d[0], 0, 0) for d in img]
-        g = [(0, d[1], 0) for d in img]
-        b = [(0, 0, d[2]) for d in img]
-
-        return r, g, b
-
     def analysis(self):
         table = np.zeros(len(self.images), self.n_ch)
         for i, img in enumerate(self.images):
@@ -60,11 +54,13 @@ class ROIAnalyzer:
             data = self.data[i]
 
             # load transformed slice image and transformed matrix
-            slice_img = rois = Image.open(img)  # transformed
+            slice_img = load_image_file(img)  # transformed
             mat = loadmat(data, squeeze_me=True, struct_as_record=False)['save_transform']
 
             # get the position within the atlas data of the transformed slice
             slice_num = mat.allen_location[0]
             slice_angle = mat.allen_location[1]
 
-            [roi_r, roi_g, B] = self.split_rgb(rois)
+            roi_r = slice_img.red_channel
+            roi_g = slice_img.green_channel
+            blue = slice_img.blue_channel
