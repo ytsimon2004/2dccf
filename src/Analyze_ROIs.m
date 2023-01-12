@@ -7,7 +7,7 @@ structure_tree_location = [pata2ref,'\structure_tree_safe_2017.csv'];
 save_folder= [path2data, '\labelled_regions'];
 
 %% LOAD THE DATA
-listTable = cell(length(images),n_ch);clc
+listTable = cell(length(images), n_ch);clc
 for i = 1:length(images)
     image_name = images(i).name;
     tmp = regexp(image_name,'_');
@@ -33,7 +33,7 @@ for i = 1:length(images)
     rois = imread(full_image_name);
     
     %extract red chqnnel aka your roi
-    [roi_r, roi_g, B]= imsplit(rois);
+    [roi_r, roi_g, B] = imsplit(rois);
     
     % if the rois come from a transformed roi image of non-contiguous roi
     % pixels (e.g. an ROI pixel for each neuron), then run this line to ensure
@@ -43,7 +43,8 @@ for i = 1:length(images)
     %     % pixels (e.g. an ROI pixel for each neuron), then run this line to ensure
     %     % a one-to-one mapping between ROIs in the
     %     %original and transformed images:
-    rois_r = uint8(imregionalmax(roi_r));[d1 d2] = size(rois_r);
+    rois_r = uint8(imregionalmax(roi_r));
+    [d1 d2] = size(rois_r);
     rois_g = uint8(imregionalmax(roi_g));
     %
     if sum(sum(roi_r)) == 0 && sum(sum(roi_g)) == 0
@@ -76,10 +77,12 @@ for i = 1:length(images)
     
     for channel = n_rgb
         clear roi_annotation
-        rois_cur = []; rois_cur = rois_total{channel};
-        assert(size(rois_cur,1)== 800&size(rois_cur,2)==1140&size(rois_cur,3)==1,'roi image is not the right size');  % note the shape need to be the same
-        full_image_name = zeros(sum(rois_cur(:)>0),3);
-        roi_annotation = cell(sum(rois_cur(:)>0),3);
+        rois_cur = [];
+        rois_cur = rois_total{channel};
+        assert(size(rois_cur, 1) == 800 & size(rois_cur, 2) == 1140 & size(rois_cur, 3) == 1, 'roi image is not the right size');  % note the shape need to be the same
+        full_image_name = zeros(sum(rois_cur(:) > 0), 3);
+        roi_annotation = cell(sum(rois_cur(:) > 0), 3);
+
         % get location and annotation for every roi pixel
         [pixels_row, pixels_column] = find(rois_cur>0);
         
