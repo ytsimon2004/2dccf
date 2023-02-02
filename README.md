@@ -50,7 +50,7 @@
         └── output_files/ (for generate output fig)
 
 * (1). raw data for confocal (i.e., .lsm, .czi or .tiff)
-* (2). z projection stacks, should be `RGB` format and save per channel (r, g, b and merge)
+* (2). z projection stacks, should be `RGB` format and save per channel (r, g, b and o)
 * (3). roi file after imageJ selection
 * (4). merged ROI, scaled RGB tif file for registration. normally use **blue (DAPI)** channel as a reference.
   for example, **green roi + red roi + DAPI channel**. Since limited channel numbers, overlap channel need to save to
