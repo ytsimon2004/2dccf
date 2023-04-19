@@ -20,7 +20,7 @@
             └── Analyze_ROIs.m
 
 ## Data structure
-
+# TODO reference
     YW001_reg/
         ├── raw/ (optional) -- (1)
         │
@@ -29,6 +29,9 @@
         │
         ├── roi/ -- (3)
         │    └── YW001_g*_s*_{channel}.roi  
+        │
+        ├── roi_cpose/ -- (3')
+        │    └── YW001_g*_s*_{channel}.roi          
         │
         ├── resize/ (src for the allenccf) 
         │    ├── YW001_g*_s*_resize.tif -- (4)
@@ -52,6 +55,7 @@
 * (1). raw data for confocal (i.e., .lsm, .czi or .tiff)
 * (2). z projection stacks, should be `RGB` format and save per channel (r, g, b and o)
 * (3). roi file after imageJ selection
+* (3'). roi file using cellpose pipeline (dev)
 * (4). merged ROI, scaled RGB tif file for registration. normally use **blue (DAPI)** channel as a reference.
   for example, **green roi + red roi + DAPI channel**. Since limited channel numbers, overlap channel need to save to
   another file using pseudo-color, then used the same transformation matrix to do the registration procedure
