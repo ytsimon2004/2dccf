@@ -149,10 +149,10 @@ for ch = n_rgb
     mkdir(save_folder)
     end
     
-    filename = [image_name(1:tmp(3)-1),'_',rois_name_cur,'_roitable.mat'];
-    csvfile = [image_name(1:tmp(3)-1),'_',rois_name_cur,'_roitable.csv'];
+    filename = [image_name(1:tmp(1)-1),'_',rois_name_cur,'_roitable.mat'];
+    csvfile = [image_name(1:tmp(1)-1),'_',rois_name_cur,'_roitable.csv'];
     save(fullfile(save_folder,filename), 'Coordinates');
     writetable(Coordinates, fullfile(save_folder,csvfile));
 end
-A = load(fullfile(save_folder,[image_name(1:tmp(3)-1),'_',rois_name_cur,'_roitable.mat']));
+A = load(fullfile(save_folder,[image_name(1:tmp(1)-1),'_',rois_name_cur,'_roitable.mat']));
 disp(['Finished: ', 'Check output files under labelled_regions folder'])

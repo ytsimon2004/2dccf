@@ -50,7 +50,7 @@
         │                             └── parsed_csv_merge.csv -- (9)
         │
         ├── resize_overlap/* (optional) -- (10)
-        └── output_files/ (for generate output fig)
+        └── output_files/ (for generate output fig or analysis)
 
 * (1). raw data for confocal (i.e., .lsm, .czi or .tiff)
 * (2). z projection stacks, should be `RGB` format and save per channel (r, g, b and o)
@@ -83,10 +83,25 @@ keyboard shortcut can be found in `HistologyHotkeyFcn` in `HistologyBrowser.m`\
    (`c` for selecting channel, `s` for save, `r` for rollback, `space` for adjusting contrast ...)
 
 3. `Navigate_Atlas_and_Register_Slices.m`: slice registration (tilt slice angle). check keyboard shortcut in command window
-   (scrolling for finding proper slice angle). Press `t` in both slice/altas viewer windows for labeling transform points (at least 10 points are recommended).
-   Press `h` + `a` to see the result. For loading the transformation matrix, press `l`
+   (scrolling for finding proper slice angle).
 
 4. `Analyze_ROIs.m`: quantification for ROIs in each channel, and output .mat/.csv 
+
+
+## User Tips for Transformation GUI
+* For batch images, Press `t` in both slice/altas viewer windows for labeling transform points 
+(at least 10 points are recommended). Press `h` + `a` to see the result. For loading the transformation matrix, press `l` 
+* After each image 
+  * Press `d` to delete all the points for both windows 
+  * Press `h` for leaving the overlay the current slice in atlas windows
+  * Press &rarr; (right arrow key) in slice windows for the next image
+  * Press &darr; (down arrow key), then scroll down for the corresponding in atlas windows
+  * Label transformation points for the new image
+
+* if need to apply the existing batch transformation matrices
+  * copy the matrices .mat file
+  * Press `l`, and `x` for saving the transformed image file (verify using `h` + `a`)
+
 
 
 ## Contact
