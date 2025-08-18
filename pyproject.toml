@@ -1,0 +1,18 @@
+[project]
+name = "ccf2d"
+version = "0.1.0"
+description = "Tools for do the 2d mouse brain registration"
+readme = "README.md"
+authors = [
+    { name = "Yu-Ting Wei", email = "ytsimon2004@gmail.com" },
+]
+requires-python = ">=3.11"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[project.scripts]
+wfanalysis = "wfanalysis.__main__:main"

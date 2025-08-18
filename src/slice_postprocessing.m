@@ -1,68 +1,69 @@
-% ------------------------------------------------------------------------
-%          Crop, Rotate, Adjust Contrast, and Downsample Histology
-% ------------------------------------------------------------------------
+%% Process Histology Images
+% This script performs comprehensive histology image processing including:
+% - Cropping, rotation, and contrast adjustment
+% - Image downsampling to match atlas resolution
+% - Quality control and orientation correction
+%
+% IMPORTANT: Run each section individually, not the entire script at once
 
-%%  SET FILE AND PARAMETERS
-%---------------- diplay information --------------%
-clc;fprintf('Cheeck your images information\n');
-disp(['Tif-files are stored at: ', path2image]);
-disp(['resolution is : ',num2str(my_Resolution), ' pixels per um']);
-disp(['Slices sections are: ', myPlane]);
-disp(['roi channels are: ', name_rgb]);
-%  * remember to run one cell at a time, instead of the whole script at once *
+%% Set File and Parameters
+% Display current configuration information
+clc;
+fprintf('=== Image Processing Configuration ===\n');
+disp(['TIF files location: ', path2image]);
+disp(['Resolution: ', num2str(my_Resolution), ' pixels per µm']);
+disp(['Section plane: ', myPlane]);
+disp(['ROI channels: ', name_rgb]);
+fprintf('======================================\n');
 
-% directory of histology images
-image_folder = path2image;
+% Directory structure configuration
+image_folder = path2image;  % Source directory for histology images
 
-% directory to save the processed images -- can be the same as the above image_folder
-% results will be put inside a new folder called 'processed' inside of this image_folder
+% Directory to save processed images (can be same as image_folder)
+% Results will be stored in a 'processed' subfolder
 save_folder = image_folder;
 
-% name of images, in order anterior to posterior or vice versa
-% once these are downsampled they will be named ['original name' '_processed.tif']
-image_file_names = dir([image_folder filesep '*.tif']); % get the contents of the image_folder
+% Image file discovery and ordering
+% Images should be ordered anterior to posterior (or vice versa)
+% Processed images will be named: [original_name]_processed.tif
+image_file_names = dir([image_folder filesep '*.tif']);
 image_file_names = natsortfiles({image_file_names.name});
-% image_file_names = {'slide no 2_RGB.tif','slide no 3_RGB.tif','slide no 4_RGB.tif'}; % alternatively, list each image in order
+% Alternative: manually specify image order
+% image_file_names = {'slide_no_2_RGB.tif', 'slide_no_3_RGB.tif', 'slide_no_4_RGB.tif'};
 
-% if the images are individual slices (as opposed to images of multiple
-% slices, which must be cropped using the cell CROP AND SAVE SLICES)
+% Image type configuration
+% Set to true if images are individual slices
+% Set to false if images contain multiple slices requiring cropping
 image_files_are_individual_slices = true;
 
-% use images that are already at reference atlas resolution (here, 10um/pixel)
-%use_already_downsampled_image = false;
+% Resolution configuration
+% Set to true if images are already at atlas resolution (10µm/pixel)
+% Set to false if downsampling is required
 use_already_downsampled_image = true;
  
 
-% pixel size parameters: microns_per_pixel of large images in the image
-% folder (if use_already_downsampled_images is set to false);
-% microns_per_pixel_after_downsampling should typically be set to 10 to match the atlas
+% Pixel size parameters
+% microns_per_pixel: resolution of input images (used only if downsampling needed)
+% microns_per_pixel_after_downsampling: target resolution to match atlas (typically 10µm)
 microns_per_pixel = 1/my_Resolution; 
-%1/0.8431;%1/0.4216 %1/0.8431 % 1/0.2108;
 microns_per_pixel_after_downsampling = 10;
 
-
-% ----------------------
-% additional parameters
-% ----------------------
-
-% if the images are cropped (image_file_are_individual_slices = false),
-% name to save cropped slices as; e.g. the third cropped slice from the 2nd
-% image containing many slices will be saved as: save_folder/processed/save_file_name02_003.tif
+% Additional processing parameters
+% save_file_name: prefix for cropped slices (if processing multi-slice images)
+% Example: 3rd slice from 2nd image -> save_folder/processed/save_file_name02_003.tif
 % save_file_name = 'SS096_';
 
-% increase gain if for some reason the images are not bright enough
-gain = 1; 
+% Image enhancement
+gain = 1;  % Increase if images need brightness adjustment
 
-% size in pixels of reference atlas brain coronal slice, typically 800 x 1140
-%atlas_reference_size = [800 1320]; %saggital sections
-%atlas_reference_size = [800 1140];%coronal sections
+% Atlas reference dimensions
+% Standard sizes: [800 1320] for sagittal, [800 1140] for coronal
 atlas_reference_size = my_atlas_ref;
 
-% finds or creates a folder location for processed images -- 
-% a folder within save_folder called processed
+% Create output directory structure
 folder_processed_images = fullfile(save_folder, 'processed');
-if ~exist(folder_processed_images)
-    mkdir(folder_processed_images)
+if ~exist(folder_processed_images, 'dir')
+    mkdir(folder_processed_images);
 end
 
 %% LOAD AND PROCESS SLICE PLATE IMAGES
