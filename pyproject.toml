@@ -6,8 +6,19 @@ readme = "README.md"
 authors = [
     { name = "Yu-Ting Wei", email = "ytsimon2004@gmail.com" },
 ]
-requires-python = ">=3.11"
-dependencies = []
+requires-python = ">=3.12"
+dependencies = [
+    "argclz>=1.0.1",
+    "neura-library>=0.5.2",
+]
+
+[project.optional-dependencies]
+
+doc = [
+    'sphinx',
+    'pydata-sphinx-theme',
+    'sphinx_copybutton'
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -15,4 +26,4 @@ build-backend = "hatchling.build"
 
 
 [project.scripts]
-wfanalysis = "wfanalysis.__main__:main"
+ccf2d = "ccf2d.__main__:main"
