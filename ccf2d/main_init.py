@@ -69,7 +69,7 @@ class InitOptions(AbstractParser):
         src = Path(__file__).parents[1] / 'res' / 'allenccf' / 'structure_tree_safe_2017.csv'
         dst = root_dir / 'structure_tree_safe_2017.csv'
         shutil.copy(src, dst)
-        print_save(output, verb='COPY')
+        print_save(dst, verb='COPY')
 
     @unstable(method='brainglobe_init')
     def brainglobe_init(self):

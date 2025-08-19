@@ -3,17 +3,15 @@
 % for histological image registration and analysis.
 
 % Set up paths - modify this to match your local installation
-path2code = 'E:\data\user\yu-ting\code\ccf2d';
-addpath(genpath([path2code]));
-cd([path2code,'\matlab']);
-path2CCF = [path2code '\matlab\allenccf'];
-
 if ispc
     homeDir = getenv('HOMEDRIVE') + getenv('HOMEPATH'); % Windows
 else
     homeDir = getenv('HOME'); % Linux / macOS
 end
 
+path2code = [homeDir '\code\ccf2d\matlab']  %'E:\data\user\yu-ting\code\ccf2d';
+addpath(genpath([path2code]));
+path2ccf = [path2code '\allenccf'];
 path2ref = [homeDir '\.ccf2d'];
 
 % Check if CCF reference data exists

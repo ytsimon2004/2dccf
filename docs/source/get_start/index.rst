@@ -6,6 +6,7 @@ Getting Started
    :caption: get start
 
    installation
+   init
 
 .. toctree::
    :maxdepth: 2
