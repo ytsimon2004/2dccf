@@ -1,4 +1,4 @@
 from argclz import AbstractParser
 
-class ViewSliceOptions(AbstractParser):
+class ViewOptions(AbstractParser):
     pass

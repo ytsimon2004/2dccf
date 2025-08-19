@@ -1,4 +1,4 @@
-%% Save Transform Matrix from Allen CCF Registration
+%% Save Transform Matrix from Allen CCF Registration TODO combine
 % This script loads Allen CCF transform matrices and extracts the 3x3 
 % transformation matrix for use with external tools.
 %

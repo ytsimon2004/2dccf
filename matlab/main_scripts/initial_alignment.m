@@ -3,11 +3,24 @@
 % for histological image registration and analysis.
 
 % Set up paths - modify this to match your local installation
-path2code = 'E:\data\user\yu-ting\repo\2dccf';
+path2code = 'E:\data\user\yu-ting\code\ccf2d';
 addpath(genpath([path2code]));
-cd([path2code,'\src']);
-path2CCF = [path2code '\src\util_allenccf'];
-path2ref = [path2code '\ref'];  % Fixed typo: pata2ref -> path2ref
+cd([path2code,'\matlab']);
+path2CCF = [path2code '\matlab\allenccf'];
+
+if ispc
+    homeDir = getenv('HOMEDRIVE') + getenv('HOMEPATH'); % Windows
+else
+    homeDir = getenv('HOME'); % Linux / macOS
+end
+
+path2ref = [homeDir '\.ccf2d'];
+
+% Check if CCF reference data exists
+if ~exist(path2ref, 'dir')
+    error(['CCF reference data not found at: ' path2ref newline ...
+           'Please run "ccf2d init" in your terminal first to download the required atlas data.']);
+end
 
 % Choose your image folder with the tif files
 path2image = uigetdir('E:\data\user\yu-ting\');

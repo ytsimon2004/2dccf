@@ -9,7 +9,8 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "argclz>=1.0.1",
-    "neura-library>=0.5.2",
+    "neura-library[atlas]>=0.5.2",
+    "numba>=0.60"
 ]
 
 [project.optional-dependencies]

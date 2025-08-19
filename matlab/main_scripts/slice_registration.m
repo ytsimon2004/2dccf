@@ -73,21 +73,3 @@ sliceBrowser(slice_figure_browser, processed_images_folder, f, reference_size);
 % 
 % save_location = processed_images_folder;
 % f = allenAtlasBrowser(tv_plot, av_plot, st, save_location, probe_save_name_suffix);
-
-%% Optional: Additional Tools and Export Functions
-
-% Uncomment to use Neuropixels probe trajectory tools:
-% allen_ccf_npx(tv, av, st)
-
-% Example code for saving atlas figures:
-% spath = 'Z:\LabPapers\SCGad\Figure-nonRetinal\ExampleAlign\01213_M1_Example_processed\transformations\example';
-% ff = f;
-% set(f, 'renderer', 'Painters');
-% name = 'atlas_9_1';
-% set(f, 'Color', [1 1 1])
-% set(gca, 'Color', [0 0 0])
-% print(f, (fullfile(spath, [name, '.eps'])), '-depsc', '-r300');
-% saveas(f, fullfile(spath, [name, '.png']));  
-
-% Uncomment to close the figure when done:
-% close gcf 
