@@ -30,7 +30,7 @@ for i = 1:length(transform_mat)
            'Transform matrix is not the correct 3x3 shape');
     
     % Save the extracted transformation matrix
-    output_filename = transform_mat(i).name;
+    output_filename = strrep(transform_mat(i).name, 'transform_data', 'transform_matrix');
     save(fullfile(save_folder, output_filename), 't');
     
     fprintf('>>> Saved %s transformation matrix\n', output_filename);
