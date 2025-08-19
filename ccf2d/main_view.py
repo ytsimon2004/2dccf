@@ -3,9 +3,11 @@ from pathlib import Path
 import polars as pl
 from argclz import AbstractParser, argument, str_tuple_type, validator
 from brainglobe_atlasapi.bg_atlas import BrainGlobeAtlas
-from neuralib.atlas.ccf.matrix import load_transform_matrix, SLICE_DIMENSION_10um, slice_transform_helper
+from neuralib.atlas.ccf.matrix import load_transform_matrix, SLICE_DIMENSION_10um, slice_transform_helper, \
+    CCFTransMatrix
 from neuralib.atlas.typing import PLANE_TYPE
 from neuralib.plot import plot_figure
+from matplotlib.axes import Axes
 
 __all__ = ['ViewOptions']
 
@@ -122,14 +124,26 @@ class ViewOptions(AbstractParser):
                 matrix = load_transform_matrix(self.ccf_data, self.cut_plane)
                 plane = matrix.get_slice_plane()
                 plane.plot_boundaries(ax=ax, extent=extent, cmap='binary_r', alpha=0.7)
+                self.with_title(matrix, ax)
 
         else:
             with plot_figure(self.output, 1, 3) as ax:
                 ax[0].imshow(raw)
-                ax[1].imshow(trans, extent=extent)
+                ax[0].set_title('resized raw')
 
                 matrix = load_transform_matrix(self.ccf_data, self.cut_plane)
+                ax[1].imshow(trans, extent=extent)
                 plane = matrix.get_slice_plane()
                 plane.plot_boundaries(ax=ax[1], extent=extent, cmap='binary_r', alpha=0.7)
+                self.with_title(matrix, ax[1])
+
                 regions = list(self.annotation_region) if self.annotation_region else None
                 plane.plot(ax=ax[2], annotation_region=regions, extent=extent, boundaries=True)
+
+    @staticmethod
+    def with_title(matrix: CCFTransMatrix, ax: Axes):
+        v = [f'{matrix.get_slice_plane().reference_value}mm from Bregma',
+             f'index: {matrix.slice_index}',
+             f'dw: {matrix.delta_xy[0]}',
+             f'dh: {matrix.delta_xy[1]}']
+        ax.set_title('\n'.join(v))
