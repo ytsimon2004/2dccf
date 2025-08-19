@@ -4,12 +4,12 @@
 
 % Set up paths - modify this to match your local installation
 if ispc
-    homeDir = getenv('HOMEDRIVE') + getenv('HOMEPATH'); % Windows
+    homeDir = fullfile(getenv('HOMEDRIVE'), getenv('HOMEPATH')); % Windows
 else
     homeDir = getenv('HOME'); % Linux / macOS
 end
 
-path2code = [homeDir '\code\ccf2d\matlab']  %'E:\data\user\yu-ting\code\ccf2d';
+path2code = [homeDir '\code\ccf2d\matlab']
 addpath(genpath([path2code]));
 path2ccf = [path2code '\allenccf'];
 path2ref = [homeDir '\.ccf2d'];
@@ -25,7 +25,7 @@ path2image = uigetdir('E:\data\user\yu-ting\');
 
 %% Image Resolution Setup
 % Check Fiji -> Image -> Show Info... -> Resolution 
-% Common values: 0.4216, 0.8431 pixels per µm
+% Common values: 0.4216, 0.8431 pixels per µm (used for downsampling)
 my_Resolution = input('What is the resolution (pixels per µm)? ');
 
 %% Atlas Reference Size Configuration
@@ -70,16 +70,16 @@ end
 % 
 % Instructions: Run each section sequentially
 % (First section -> Second Section -> Last section)
-Process_Histology
+slice_preprocessing
 
 %% Step 2: Register Slices to Allen Brain Atlas 
 % This script handles the registration of histological slices
 % to the Allen Common Coordinate Framework
-Navigate_Atlas_and_Register_Slices
+slice_registration
 
 %% Step 3: Analyze Regions of Interest (ROIs)
 % Extract ROI table with spatial locations of selected cells
 % throughout the entire brain coordinate system
-Analyze_ROIs
+analysis_rois
 
 
