@@ -22,11 +22,9 @@ UV Environment (Recommended)
 
 UV is a fast Python package installer and resolver. If you don't have UV installed, install it first:
 
-.. code-block:: bash
+.. seealso::
 
-    # Install UV
-    curl -LsSf https://astral.sh/uv/install.sh | sh    # Linux/macOS
-    # or for Windows: powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+    https://docs.astral.sh/uv/getting-started/installation/
 
 Then set up the environment:
 
