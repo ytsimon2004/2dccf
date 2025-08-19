@@ -7,6 +7,8 @@ Getting Started
 
    installation
    init
+   roi
+   data_structure
 
 .. toctree::
    :maxdepth: 2
@@ -18,6 +20,6 @@ Getting Started
    :maxdepth: 2
    :caption: tools
 
-   cli
+   view
 
 
